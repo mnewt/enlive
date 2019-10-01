@@ -1,3 +1,7 @@
+# deps.edn version
+
+This is a tiny modification of cgrand/enlive to update dependencies and use `deps.edn`.
+
 # Enlive [![Build Status](https://travis-ci.org/cgrand/enlive.png?branch=master)](https://travis-ci.org/cgrand/enlive)
 
 Enlive is a selector-based (à la CSS) templating library for Clojure.
@@ -25,6 +29,7 @@ All artifacts are published to [clojars](https://clojars.org/enlive). Latest ver
 (most recent first)
 
 1.1.6:
+
 - ADD: exception message when html-resource not found.
 - FIX: auto-reload on windows (also works with chestnut).
 
@@ -39,8 +44,8 @@ namespace is reloaded (as per `(require ... :reload)`).
 
 ### Misc
 
-  * Perf improvements
-  * Fixes to `${vars}` substitutions
+- Perf improvements
+- Fixes to `${vars}` substitutions
 
 ### Pluggable parsers! (1.1.1)
 
@@ -56,7 +61,7 @@ can opt for another parser either locally:
   [])
 ```
 
-or globally __for the declaring ns__:
+or globally **for the declaring ns**:
 
 ```clj
 (set-ns-parser! xml-parser)
@@ -69,7 +74,7 @@ builtin ones.
 ### `${vars}` substitutions (1.1.1)
 
 The following selector + function is going to replace any `${var}` in
-text __and attributes__ by the value found in the map (or any function).
+text **and attributes** by the value found in the map (or any function).
 
 ```clj
 [:#container any-node] (replace-vars {:name "world" :class "hello"})
@@ -95,6 +100,7 @@ Example:
   [:another :selector] another-transformation
   [:a :dependent :selector] yet-another-transformation
 ```
+
 If the first two transformations are independent you can rewrite this code as:
 
 ```clj
@@ -199,8 +205,7 @@ Content of `templates/application.html`:
   <head>
     <title>This is a title placeholder</title>
   </head>
-  <body>
-  </body>
+  <body></body>
 </html>
 ```
 
@@ -249,14 +254,14 @@ Content of `templates/header.html`
 
 Enlive selectors can match either nodes or fragments (several adjacent nodes).
 
-At the core, *every selector is a vector*. The items of this vector are called
-*steps*.
+At the core, _every selector is a vector_. The items of this vector are called
+_steps_.
 
 A step is a predicate, for example `:h1`, `:p.some-class` or even
 `(attr? :lang)`.
 
 To select elements which match several predicates, you need to group
-predicates into a vector: *inside steps, vectors mean "and"*. This may seem
+predicates into a vector: _inside steps, vectors mean "and"_. This may seem
 confusing but the rule is simple: the outer-most vector hierarchically
 chains steps, all other vectors denote intersection (and) between steps.
 
@@ -264,15 +269,15 @@ So `[:p (attr? :lang)]` is going to match any elements with a `lang` attribute
 inside a `:p` element. On the other hand, `[[:p (attr? :lang)]]` is going to match
 any `p` with a `lang` attribute.
 
-Similarly, sets group predicates in an union. Hence *inside steps, sets mean
-"or"*. So `[#{:div.class1 :div.class2}]` match every `div` which has either
+Similarly, sets group predicates in an union. Hence _inside steps, sets mean
+"or"_. So `[#{:div.class1 :div.class2}]` match every `div` which has either
 `class1` or `class2`. This can alternatively be written
 as `[[:div #{:.class1 .class2}]]`. Indeed you can have nested "ors" and "ands"
 which means nested sets and vectors.
 
 At the top level you can have a big "or" between selectors by wrapping several
 selectors in a set. `#{[:td :em] [:th :em]}` is going to match any `em` insides
- either a `th` or a `td`. This is equivalent to `[#{:td :th} :em]`.
+either a `th` or a `td`. This is equivalent to `[#{:td :th} :em]`.
 
 ### Selector Syntax
 
@@ -321,6 +326,7 @@ resulting tree is passed to the next rules.
 A transformation is a function that returns either a node or collection of node.
 
 Enlive defines several helper functions:
+
 ```clojure
 ;; Replaces the content of the element. Values can be nodes or collection of nodes.
 (content "xyz" a-node "abc")
@@ -380,4 +386,4 @@ unwrap
 
 ## Known limitations/problems
 
-* No namespaces support (hence unsuitable for most XML)
+- No namespaces support (hence unsuitable for most XML)
