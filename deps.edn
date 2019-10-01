@@ -1,8 +1,4 @@
-{:deps
- {org.ccil.cowan.tagsoup/tagsoup {:mvn/version "1.2.1"}
-  org.jsoup/jsoup {:mvn/version "1.11.3"}}
-
- :paths ["src"]
-
- :aliases
- {:dev {:extra-paths ["test"]}}}
+{:aliases {:dev {:extra-paths ["test"]}}
+ :deps {org.ccil.cowan.tagsoup/tagsoup #:mvn{:version "1.2.1"}
+        org.jsoup/jsoup #:mvn{:version "1.12.1"}}
+ :paths ["src"]}
